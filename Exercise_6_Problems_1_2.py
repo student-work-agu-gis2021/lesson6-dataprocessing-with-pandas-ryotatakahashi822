@@ -18,6 +18,13 @@ data = None
 
 # YOUR CODE HERE 1
 
+fp=r'data/1091402txt'
+data=pd.read_csv(
+  formatskiprows=[1],
+  delim_whitespace=True,
+  na_values=[-9999]
+)
+
 # ### Part 2 
 # 
 # In this section, you will calculate simple statistics based on the input data:
@@ -28,6 +35,7 @@ data = None
 tavg_nodata_count = None
 #YOUR CODE HERE 2
 
+tavg_nodata_count=data['TAVG'].isnull().sum()
 
 #CAUTION!!! DON'T EDIT THIS PART START
 # Print out the solution:
@@ -41,6 +49,8 @@ print('Number of no-data values in column "TAVG":',tavg_nodata_count)
 tmin_nodata_count = None
 #YOUR CODE HERE 3
 
+tmin_nodata_count=data['TMIN'].isnull().sum()
+
 #CAUTION!!! DON'T EDIT THIS PART START
 # Print out the solution:
 print('Number of no-data values in column "TMIN":', tmin_nodata_count)
@@ -52,6 +62,8 @@ print('Number of no-data values in column "TMIN":', tmin_nodata_count)
 
 day_count = None 
 #YOUR CODE HERE 4
+
+day_count=len(data['DATE'])
 
 #CAUTION!!! DON'T EDIT THIS PART START
 # Print out the solution:
@@ -65,6 +77,8 @@ print("Number of days:", day_count)
 first_obs = None
  
 # YOUR CODE HERE 5
+
+first_obs=data.loc[0,'DATE']
 
 #CAUTION!!! DON'T EDIT THIS PART START
 # Print out the solution:
@@ -83,6 +97,7 @@ last_obs = None
 print('Date of the last observation:', last_obs)
 #CAUTION!!! DON'T EDIT THIS PART END
 
+last_obs=data.loc[day_count-1,'DATE']
 
 # - Find the average temperature for the whole data file (all observtions) from column `TAVG`
 #     - Assign your answer into a variable called `avg_temp`
@@ -90,6 +105,8 @@ print('Date of the last observation:', last_obs)
 avg_temp = None
 
 # YOUR CODE HERE 7
+
+avg_temp=data['TAVG'].mean()
 
 #CAUTION!!! DON'T EDIT THIS PART START
 # Print out the solution:
@@ -103,6 +120,8 @@ print('Average temperature (F) for the whole dataset:', round(avg_temp, 2))
 avg_temp_1969 = None
 
 # YOUR CODE HERE 8
+
+avg_temp_1969=data['TMAX'].loc[(data['DATE']>=19690501)&(data['DATE']<19690901)].mean()
 
 #CAUTION!!! DON'T EDIT THIS PART START
 # This test print should print a number
